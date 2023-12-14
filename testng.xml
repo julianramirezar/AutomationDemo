@@ -3,7 +3,7 @@
 <suite name="Suite">
     <test name="Test">
          <classes>
-             <class name="AutomationDemo.TestHomePage"/>
+             <class name="AutomationDemo.TC1RegisterUser"/>
           </classes>
      </test> <!-- Test -->
 </suite> <!-- Suite -->
