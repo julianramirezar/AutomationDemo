@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeSuite;
 
 import Pages.HomePage;
 import Pages.LoginPage;
+import Pages.SignupPage;
 
 public class TC1RegisterUser {
 	String url = "http://automationexercise.com";
@@ -23,34 +24,31 @@ public class TC1RegisterUser {
 		driver = new ChromeDriver();
 		driver.get(url);
 		driver.manage().window().maximize();		
-	}
-	
-	
+	}	
 	
 	@Test 
 	public void VerifyHomePage() {
 		HomePage home = new HomePage(driver);
 		
 		// Verify that home page is visible successfully
-		Assert.assertTrue(driver.findElement(By.id("slider-carousel")).isDisplayed());
-		home.clickLogin();
+		Assert.assertTrue(home.sliderCarousel().isDisplayed());
+		home.clickLogin();		
 		
 		// Verify 'New User Signup!' is visible
-		Assert.assertTrue(driver.findElement(By.className("signup-form")).isDisplayed());		
-		Assert.assertEquals("New User Signup!",driver.findElement(By.xpath("//div[@class='signup-form']/h2")).getText());
-	
 		LoginPage login = new LoginPage(driver);
+		Assert.assertTrue(login.signupForm().isDisplayed());		
+		Assert.assertTrue(login.signupForm().getText().contains("New User Signup!"));		
 
 		login.setSignUpName(loginName);
 		login.setSignUpEmail(loginEmail);			
 		login.clickSignUpButton();
 		
 		// Verify that 'ENTER ACCOUNT INFORMATION' is visible
-		Assert.assertTrue(driver.findElement(By.className("login-form")).isDisplayed());		
-		Assert.assertEquals("ENTER ACCOUNT INFORMATION",driver.findElement(By.xpath("//div[@class='login-form']/h2")).getText());
+		SignupPage signup = new SignupPage(driver);
+		Assert.assertTrue(signup.loginForm().isDisplayed());		
+		Assert.assertTrue(signup.loginForm().getText().contains("ENTER ACCOUNT INFORMATION"));
 		
-	}
-	
+	}	
 	
 	@AfterSuite
 	public void shutDown() {

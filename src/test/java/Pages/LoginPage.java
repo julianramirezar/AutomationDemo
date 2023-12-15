@@ -9,14 +9,10 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPage {
 	
 	// Web Elements
-	@FindBy(xpath="//input[@data-qa='signup-name']")
-	WebElement signupName;
-		
-	@FindBy(xpath="//input[@data-qa='signup-email']")
-	WebElement signupEmail;
-	
-	@FindBy(xpath="//div[@class='signup-form']/form/button")
-	WebElement signupButton;
+	@FindBy(xpath="//input[@data-qa='signup-name']")	WebElement signupName;		
+	@FindBy(xpath="//input[@data-qa='signup-email']")	WebElement signupEmail;	
+	@FindBy(xpath="//div[@class='signup-form']/form/button")	WebElement signupButton;	
+	@FindBy(className="signup-form")	WebElement signupForm;
 	
 	// Constructor
 	public LoginPage(WebDriver driver) {
@@ -35,4 +31,7 @@ public class LoginPage {
 		signupButton.click();
 	}
 	
+	public WebElement signupForm() {
+		return signupForm;
+	}
 }

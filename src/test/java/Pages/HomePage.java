@@ -9,9 +9,9 @@ import org.openqa.selenium.support.PageFactory;
 public class HomePage {
 	
 	// Web Elements
-	@FindBy(linkText="Signup / Login")
-	WebElement navbarLogin;
-	
+	@FindBy(linkText="Signup / Login")	WebElement navbarLogin;	
+	@FindBy(id="slider-carousel")	WebElement sliderCarousel;
+		
 	// Constructor
 	public HomePage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -21,6 +21,8 @@ public class HomePage {
 		navbarLogin.click();
 	}
 	
-	
-	
+	public WebElement sliderCarousel() {
+		return sliderCarousel;
+	}
+
 }
