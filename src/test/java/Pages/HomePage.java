@@ -12,6 +12,7 @@ public class HomePage {
 	@FindBy(id="slider-carousel")	WebElement sliderCarousel;
 	@FindBy(xpath="//div[@class='col-sm-8']/div/ul/li[10]")	WebElement loggedInAs;
 	@FindBy(linkText="Delete Account")	WebElement deleteAccount;
+	@FindBy(linkText="Logout")	WebElement logOut;
 	
 	// Constructor
 	public HomePage(WebDriver driver) {
@@ -29,5 +30,8 @@ public class HomePage {
 	}
 	public WebElement deleteAccount() {
 		return deleteAccount;
+	}
+	public WebElement logOut() {
+		return logOut;
 	}
 }

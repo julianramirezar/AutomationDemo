@@ -37,7 +37,7 @@ public class TC1RegisterUser {
 	}	
 	
 	@Test 
-	public void VerifyHomePage() {
+	public void RegisterUser() {
 		HomePage home = new HomePage(driver);
 		
 		// Verify that home page is visible successfully
