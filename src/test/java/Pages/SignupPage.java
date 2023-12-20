@@ -149,5 +149,11 @@ public class SignupPage {
 		setMobile(newAccount[15]);
 		createAccountButton.click();
 	}
+	public void quickCreateAccount() {
+		String[] newAccount = {"M", "Test User", "password123", "23", "June", "1989",
+				"Test", "User", "TestCompany", "Evergreen St. 123", "5th floor","United States",
+				"California", "Los Angeles", "90210", "011899621"};
+		createAccount(newAccount);
+	}
 	
 }

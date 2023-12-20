@@ -13,11 +13,11 @@ import Pages.HomePage;
 import Pages.LoginPage;
 import Pages.SignupPage;
 
-public class TC2LoginUserCorrect {
+public class TC5RegisterExistingEmail {
 	String url = "http://automationexercise.com";
 	WebDriver driver;	
 	String loginName = "Test User";
-	String loginEmail = "testcase2login@example.com";
+	String loginEmail = "testcase5existing@example.com";
 	String[] newAccount = {"M", "Test User", "password123", "23", "June", "1989",
 			"Test", "User", "TestCompany", "Evergreen St. 123", "5th floor","United States",
 			"California", "Los Angeles", "90210", "011899621"};
@@ -45,29 +45,27 @@ public class TC2LoginUserCorrect {
 	}	
 	
 	@Test 
-	public void LoginUserCorrect() {
+	public void RegisterExistingEmail() {
 		// Verify that home page is visible successfully
 		HomePage home = new HomePage(driver);
 		home.navbarLogin().click();		
 		
-		// Verify 'Login to your account' is visible
+		// Verify 'New User Signup!' is visible
 		LoginPage login = new LoginPage(driver);
-		Assert.assertTrue(login.loginForm().isDisplayed());		
-		Assert.assertTrue(login.loginForm().getText().contains("Login to your account"));
+		Assert.assertTrue(login.signupForm().isDisplayed());		
+		Assert.assertTrue(login.signupForm().getText().contains("New User Signup!"));		
 				
-		// Verify that 'Logged in as username' is visible
-		login.logIn(loginEmail, newAccount[2]);
-		Assert.assertTrue(home.loggedInAs().getText().contains("Logged in as " + loginName));
-		
-		// Verify that 'ACCOUNT DELETED!' is visible
-		home.deleteAccount().click();
-		AccountDeletedPage accountDeleted = new AccountDeletedPage(driver);
-		Assert.assertTrue(accountDeleted.accountDeleted().isDisplayed());		
-		Assert.assertTrue(accountDeleted.accountDeleted().getText().contains("ACCOUNT DELETED!"));		
+		// Verify error 'Email Address already exist!' is visible
+		login.signUp(loginName, loginEmail);
+		Assert.assertTrue(login.signupForm().getText().contains("Email Address already exist!"));
 	}	
 	
 	@AfterSuite
-	public void shutDown() {
+	public void shutDown() {		
+		LoginPage login = new LoginPage(driver);
+		login.logIn(loginEmail, newAccount[2]);
+		HomePage home = new HomePage(driver);
+		home.deleteAccount().click();
 		driver.close();
 	}
 }

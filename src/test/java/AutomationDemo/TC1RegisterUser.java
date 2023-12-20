@@ -49,9 +49,7 @@ public class TC1RegisterUser {
 		Assert.assertTrue(login.signupForm().isDisplayed());		
 		Assert.assertTrue(login.signupForm().getText().contains("New User Signup!"));		
 
-		login.setSignUpName(loginName);
-		login.setSignUpEmail(loginEmail);			
-		login.clickSignUpButton();
+		login.signUp(loginName, loginEmail);
 		
 		// Verify that 'ENTER ACCOUNT INFORMATION' is visible
 		SignupPage signup = new SignupPage(driver);

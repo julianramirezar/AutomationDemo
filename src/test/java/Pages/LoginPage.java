@@ -46,6 +46,13 @@ public class LoginPage {
 	public void clickLogInButton() {
 		logInButton.click();
 	}
+	
+	public void signUp(String name, String email) {
+		setSignUpName(name);
+		setSignUpEmail(email);
+		clickSignUpButton();
+	}
+	
 	public void logIn(String email, String password) {
 		sendLoginEmail(email);
 		sendLoginPassword(password);

@@ -5,7 +5,9 @@
          <classes>
              <class name="AutomationDemo.TC1RegisterUser"/>
              <class name="AutomationDemo.TC2LoginUserCorrect"/>
-             <class name="AutomationDemo.TC3LoginUserIncorrect"/>       
+             <class name="AutomationDemo.TC3LoginUserIncorrect"/>
+             <class name="AutomationDemo.TC4LogoutUser"/>
+             <class name="AutomationDemo.TC5RegisterExistingEmail"/>
           </classes>
      </test> <!-- Test -->
 </suite> <!-- Suite -->
