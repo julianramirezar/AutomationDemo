@@ -66,6 +66,10 @@ public class TC4LogoutUser {
 	
 	@AfterSuite
 	public void shutDown() {
+		LoginPage login = new LoginPage(driver);
+		login.logIn(loginEmail, newAccount[2]);
+		HomePage home = new HomePage(driver);
+		home.deleteAccount().click();
 		driver.close();
 	}
 }

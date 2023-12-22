@@ -13,6 +13,8 @@ public class HomePage {
 	@FindBy(xpath="//div[@class='col-sm-8']/div/ul/li[10]")	WebElement loggedInAs;
 	@FindBy(linkText="Delete Account")	WebElement deleteAccount;
 	@FindBy(linkText="Logout")	WebElement logOut;
+	@FindBy(linkText="Contact us")	WebElement ContactUs;
+	@FindBy(linkText="Home")	WebElement Home;
 	
 	// Constructor
 	public HomePage(WebDriver driver) {
@@ -33,5 +35,11 @@ public class HomePage {
 	}
 	public WebElement logOut() {
 		return logOut;
+	}
+	public WebElement ContactUs() {
+		return ContactUs;
+	}
+	public WebElement Home() {
+		return Home;
 	}
 }

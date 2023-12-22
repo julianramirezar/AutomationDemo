@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Automation Demo">
-    <test name="Test">
-         <classes>
-             <class name="AutomationDemo.TC1RegisterUser"/>
-             <class name="AutomationDemo.TC2LoginUserCorrect"/>
-             <class name="AutomationDemo.TC3LoginUserIncorrect"/>
-             <class name="AutomationDemo.TC4LogoutUser"/>
-             <class name="AutomationDemo.TC5RegisterExistingEmail"/>
-          </classes>
-     </test> <!-- Test -->
-</suite> <!-- Suite -->
+	<test name="Test">
+		<classes>
+			<class name="AutomationDemo.TC1RegisterUser" />
+			<class name="AutomationDemo.TC2LoginUserCorrect" />
+			<class name="AutomationDemo.TC3LoginUserIncorrect" />
+			<class name="AutomationDemo.TC4LogoutUser" />
+			<class name="AutomationDemo.TC5RegisterExistingEmail" />
+			<class name="AutomationDemo.TC6ContactUs" />
+		</classes>
+	</test> <!--
+	Test -->
+</suite> <!--
+Suite -->

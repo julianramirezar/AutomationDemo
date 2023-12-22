@@ -8,7 +8,6 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import Pages.AccountCreatedPage;
-import Pages.AccountDeletedPage;
 import Pages.HomePage;
 import Pages.LoginPage;
 import Pages.SignupPage;
@@ -18,7 +17,9 @@ public class TC5RegisterExistingEmail {
 	WebDriver driver;	
 	String loginName = "Test User";
 	String loginEmail = "testcase5existing@example.com";
-	String[] newAccount = {"M", "Test User", "password123", "23", "June", "1989",
+	String loginPassword = "password123";
+	
+	String[] newAccount = {"M", "Test User", loginPassword, "23", "June", "1989",
 			"Test", "User", "TestCompany", "Evergreen St. 123", "5th floor","United States",
 			"California", "Los Angeles", "90210", "011899621"};
 	/*
@@ -63,7 +64,7 @@ public class TC5RegisterExistingEmail {
 	@AfterSuite
 	public void shutDown() {		
 		LoginPage login = new LoginPage(driver);
-		login.logIn(loginEmail, newAccount[2]);
+		login.logIn(loginEmail, loginPassword);
 		HomePage home = new HomePage(driver);
 		home.deleteAccount().click();
 		driver.close();

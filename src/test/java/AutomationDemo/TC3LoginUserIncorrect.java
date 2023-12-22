@@ -1,7 +1,13 @@
 package AutomationDemo;
 
+import java.io.IOException;
+import java.lang.invoke.MethodHandles;
+
 import org.junit.Assert;
 import org.testng.annotations.Test;
+
+import com.github.javafaker.Faker;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterSuite;
@@ -11,8 +17,10 @@ import Pages.LoginPage;
 
 public class TC3LoginUserIncorrect {
 	String url = "http://automationexercise.com";
-	String incorrectEmail = "incorrectemail@example.com";
-	String incorrectPassword = "123pass123";
+	String testCaseName = MethodHandles.lookup().lookupClass().getSimpleName();
+	Faker faker = new Faker();
+	String incorrectEmail = faker.internet().emailAddress();
+	String incorrectPassword = faker.internet().password();
 	WebDriver driver;
 			
 	@BeforeSuite
@@ -23,7 +31,7 @@ public class TC3LoginUserIncorrect {
 	}	
 	
 	@Test 
-	public void LoginUserIncorrect() {
+	public void LoginUserIncorrect() throws IOException {
 		HomePage home = new HomePage(driver);
 		
 		// Verify that home page is visible successfully
@@ -37,7 +45,9 @@ public class TC3LoginUserIncorrect {
 		
 		// Verify error 'Your email or password is incorrect!' is visible
 		login.logIn(incorrectEmail, incorrectPassword);
-		Assert.assertTrue(login.loginForm().getText().contains("Your email or password is incorrect!"));		
+		Assert.assertTrue(login.loginForm().getText().contains("Your email or password is incorrect!"));	
+				
+		Utils.TakeScreenshot.saveScreen(driver, testCaseName);
 	}	
 	
 	@AfterSuite
