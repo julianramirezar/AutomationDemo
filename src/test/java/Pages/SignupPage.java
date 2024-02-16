@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import Utils.User;
+
 public class SignupPage {
 	
 	// Web Elements
@@ -92,9 +94,9 @@ public class SignupPage {
 		address2Field.clear();
 		address2Field.sendKeys(address2);	
 	}	
-	public void setCountry(String country) {
+	public void setCountry(int country) {
 		Select setCountry = new Select(countryField);
-		setCountry.selectByVisibleText(country);
+		setCountry.selectByIndex(country);
 	}	
 	public void setState(String state) {
 		stateField.clear();
@@ -115,7 +117,7 @@ public class SignupPage {
 	public void clickCreateAccount() {
 		createAccountButton.click();
 	}
-	public void createAccount(String[] newAccount) {
+	public void createAccount(User newUser) {
 		
 		/*
 		String gender, String username, String password, String day,
@@ -124,36 +126,29 @@ public class SignupPage {
 		String state, String City, String zipCode, String mobile
 		*/
 		
-		if (newAccount[0] == "M"){
+		if (newUser.getGender() == "M"){
 			clickGenderMale();
 		}
 		else {
 			clickGenderFemale();
 		}
-		setUsername(newAccount[1]);
-		setPassword(newAccount[2]);
-		setDay(newAccount[3]);
-		setMonth(newAccount[4]);
-		setYear(newAccount[5]);
-		setFirstName(newAccount[6]);
-		setLastName(newAccount[7]);
-		setCompany(newAccount[8]);
+		setUsername(newUser.getUsername());
+		setPassword(newUser.getPassword());
+		setDay(newUser.getDay());
+		setMonth(newUser.getMonth());
+		setYear(newUser.getYear());
+		setFirstName(newUser.getFirstName());
+		setLastName(newUser.getLastName());
+		setCompany(newUser.getPassword());
 		newsletterCheck();
 		offersCheck();
-		setAddress1(newAccount[9]);
-		setAddress2(newAccount[10]);
-		setCountry(newAccount[11]);
-		setState(newAccount[12]);
-		setCity(newAccount[13]);
-		setZipCode(newAccount[14]);
-		setMobile(newAccount[15]);
+		setAddress1(newUser.getAddress1());
+		setAddress2(newUser.getAddress2());
+		setCountry(newUser.getCountry());
+		setState(newUser.getState());
+		setCity(newUser.getCity());
+		setZipCode(newUser.getZipCode());
+		setMobile(newUser.getMobile());
 		createAccountButton.click();
-	}
-	public void quickCreateAccount() {
-		String[] newAccount = {"M", "Test User", "password123", "23", "June", "1989",
-				"Test", "User", "TestCompany", "Evergreen St. 123", "5th floor","United States",
-				"California", "Los Angeles", "90210", "011899621"};
-		createAccount(newAccount);
-	}
-	
+	}	
 }

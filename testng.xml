@@ -10,7 +10,6 @@
 			<class name="AutomationDemo.TC5RegisterExistingEmail" />
 			<class name="AutomationDemo.TC6ContactUs" />
 		</classes>
-	</test> <!--
-	Test -->
-</suite> <!--
-Suite -->
+	</test> <!--Test-->
+
+</suite> <!--Suite-->

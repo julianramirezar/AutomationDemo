@@ -1,33 +1,28 @@
 package AutomationDemo;
 
+import java.lang.invoke.MethodHandles;
+
 import org.junit.Assert;
 import org.testng.annotations.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-
+import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import Pages.AccountCreatedPage;
 import Pages.HomePage;
 import Pages.LoginPage;
 import Pages.SignupPage;
+import Utils.User;
 
 public class TC4LogoutUser {
 	String url = "http://automationexercise.com";
+	String testCaseName = MethodHandles.lookup().lookupClass().getSimpleName();
 	WebDriver driver;	
-	String loginName = "Test User";
-	String loginEmail = "testcase4logout@example.com";
-	String[] newAccount = {"M", "Test User", "password123", "23", "June", "1989",
-			"Test", "User", "TestCompany", "Evergreen St. 123", "5th floor","United States",
-			"California", "Los Angeles", "90210", "011899621"};
-	/*
-	String gender, String username, String password, String day,
-	String month, String year, String firstName, String lastName,
-	String company, String address1, String address2, String country, 
-	String state, String City, String zipCode, String mobile
-	*/
+	User newUser = new User();	
 			
-	@BeforeSuite
+	@BeforeMethod
 	public void setUp() {		
 		driver = new ChromeDriver();
 		driver.get(url);
@@ -35,11 +30,14 @@ public class TC4LogoutUser {
 		HomePage home = new HomePage(driver);		
 		home.navbarLogin().click();
 		LoginPage login = new LoginPage(driver);
-		login.signUp(loginName, loginEmail);
+		login.signUp(newUser.getUsername(), newUser.getEmail());
 		SignupPage signup = new SignupPage(driver);
-		signup.createAccount(newAccount);
+		signup.createAccount(newUser);
+		driver.navigate().refresh();
 		AccountCreatedPage accountCreated = new AccountCreatedPage(driver);
 		accountCreated.clickContinueButton();
+		driver.navigate().refresh();
+		home.Home().click();
 		home.logOut().click();
 	}	
 	
@@ -55,8 +53,8 @@ public class TC4LogoutUser {
 		Assert.assertTrue(login.loginForm().getText().contains("Login to your account"));
 				
 		// Verify that 'Logged in as username' is visible
-		login.logIn(loginEmail, newAccount[2]);
-		Assert.assertTrue(home.loggedInAs().getText().contains("Logged in as " + loginName));
+		login.logIn(newUser.getEmail(), newUser.getPassword());
+		Assert.assertTrue(home.loggedInAs().getText().contains("Logged in as " + newUser.getUsername()));
 		
 		// Verify that user is navigated to login page
 		home.logOut().click();
@@ -64,12 +62,15 @@ public class TC4LogoutUser {
 		Assert.assertTrue(login.loginForm().getText().contains("Login to your account"));	
 	}	
 	
-	@AfterSuite
+	@AfterMethod
+	public void onFailure(ITestResult result) throws Exception {
+		if (result.getStatus() == ITestResult.FAILURE) {
+			Utils.TakeScreenshot.saveScreen(driver, testCaseName);
+		}
+	}
+	
+	@AfterClass
 	public void shutDown() {
-		LoginPage login = new LoginPage(driver);
-		login.logIn(loginEmail, newAccount[2]);
-		HomePage home = new HomePage(driver);
-		home.deleteAccount().click();
 		driver.close();
 	}
 }

@@ -10,8 +10,10 @@ import com.github.javafaker.Faker;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import Pages.HomePage;
 import Pages.LoginPage;
 
@@ -23,7 +25,7 @@ public class TC3LoginUserIncorrect {
 	String incorrectPassword = faker.internet().password();
 	WebDriver driver;
 			
-	@BeforeSuite
+	@BeforeMethod
 	public void setUp() {		
 		driver = new ChromeDriver();
 		driver.get(url);
@@ -50,7 +52,14 @@ public class TC3LoginUserIncorrect {
 		Utils.TakeScreenshot.saveScreen(driver, testCaseName);
 	}	
 	
-	@AfterSuite
+	@AfterMethod
+	public void onFailure(ITestResult result) throws Exception {
+		if (result.getStatus() == ITestResult.FAILURE) {
+			Utils.TakeScreenshot.saveScreen(driver, testCaseName);
+		}
+	}
+	
+	@AfterClass
 	public void shutDown() {
 		driver.close();
 	}
